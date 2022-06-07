@@ -1,0 +1,7 @@
+{
+  "name": "unicorns-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
