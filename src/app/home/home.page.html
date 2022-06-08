@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      Unicorns list
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+
+      <ng-container *ngIf="(unicorns$ | async) as unicorns; else emptyState">
+        <ion-card
+          *ngFor="let unicorn of unicorns"
+          class="unicorn-card"
+        >
+          <ion-card-header>
+            <div class="color-display">
+              <app-unicorn-display [unicorn]="unicorn">
+              </app-unicorn-display>
+            </div>
+            <ion-card-title>
+              {{ unicorn.name }}
+            </ion-card-title>
+            <ion-card-subtitle>{{ unicorn.gender }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            Age: {{ unicorn.age }}
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
+
+
+  <ng-template #emptyState>
+    <ion-text
+      color="primary"
+      class="ion-text-center"
+    >
+      <h2>No unicrons yet</h2>
+    </ion-text>
+  </ng-template>
+
+  <!-- Fixed Floating Action Button that does not scroll with the content -->
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    class="ion-fab"
+  >
+    <ion-fab-button
+      *ngIf="atLeastOneMaleAndOneFemale"
+      class="btn-make-love"
+      (click)="onClickNavigateToLovePage()"
+    >
+      <ion-icon name="heart-half-outline"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button (click)="onClickNavigateToCreatePage()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
