@@ -5,8 +5,10 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "ionic": "ionic",
+    "start": "ng serve --host=0.0.0.0 --port 4201",
+    "build": "ionic build",
+    "build:prod": "ionic build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -25,6 +27,11 @@
     "@capacitor/keyboard": "1.2.2",
     "@capacitor/status-bar": "1.0.8",
     "@ionic/angular": "^6.0.0",
+    "@ionic/pwa-elements": "^3.1.1",
+    "@ionic/storage-angular": "^3.0.6",
+    "@paddls/ts-serializer": "^1.0.12-rc.0",
+    "@witty-services/ngx-serializer": "^1.0.9",
+    "@witty-services/ts-serializer": "^1.0.12-rc.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
