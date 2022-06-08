@@ -1,0 +1,24 @@
+.error {
+  color: var(--highlight-color-invalid);
+}
+
+.color-input {
+  ::ng-deep {
+    input {
+      height: 50px;
+    }
+  }
+}
+
+.unicorn-display {
+  width: 100%;
+  display: flex;
+  max-height: 500px;
+}
+
+.footer {
+  display: flex;
+  .btn-save {
+    width: 300px;
+  }
+}
