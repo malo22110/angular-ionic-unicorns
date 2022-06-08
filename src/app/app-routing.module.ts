@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { LoveRouteGuard } from './core/guards/love-route.guard';
 
 const routes: Routes = [
   {
@@ -15,6 +16,12 @@ const routes: Routes = [
     path: 'create',
     loadChildren: () => import('./create/create.module').then(m => m.CreatePageModule)
   },
+  {
+    path: 'love',
+    loadChildren: () => import('./love/love.module').then(m => m.LovePageModule),
+    canActivateChild: [
+      LoveRouteGuard
+    ]
   }
 ];
 @NgModule({
@@ -23,4 +30,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

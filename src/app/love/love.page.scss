@@ -1,0 +1,26 @@
+.parents-col {
+  max-width: 250px;
+  margin-right: 15px;
+
+  .unicorn-card {
+    width: 250px;
+    &:hover {
+      border: 2px solid yellow;
+    }
+
+    &.selected {
+      background-color: yellow;
+    }
+
+    .color-display {
+      width: 100%;
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  .btn-save {
+    width: 300px;
+  }
+}
