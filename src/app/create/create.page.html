@@ -121,13 +121,15 @@
 </ion-content>
 
 <ion-footer class="footer ion-justify-content-center">
-  <ion-button
-    expand="full"
-    color="secondary"
-    class="btn-save"
-    (click)="onClickSubmitForm()"
-    [disabled]="!unicornForm.valid"
-  >
-    Save
-  </ion-button>
+  <ion-toolbar>
+    <ion-button
+      expand="full"
+      color="secondary"
+      class="btn-save"
+      (click)="onClickSubmitForm()"
+      [disabled]="!unicornForm.valid"
+    >
+      Save
+    </ion-button>
+  </ion-toolbar>
 </ion-footer>

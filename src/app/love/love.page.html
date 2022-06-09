@@ -65,13 +65,16 @@
   </ion-grid>
 </ion-content>
 
-<ion-footer class="footer ion-justify-content-center">
-  <ion-button
-    expand="full"
-    color="secondary"
-    (click)="onClickMakeABaby()"
-    [disabled]="!parent1 || !parent2 || !parent1.canMakeABabyWith(parent2)"
-  >
-    Let's Make a Baby
-  </ion-button>
+<ion-footer class="footer">
+  <ion-toolbar class="footer ion-justify-content-center">
+    <ion-button
+      class="btn-save"
+      expand="block"
+      color="secondary"
+      (click)="onClickMakeABaby()"
+      [disabled]="!parent1 || !parent2 || !parent1.canMakeABabyWith(parent2)"
+    >
+      Let's Make a Baby
+    </ion-button>
+  </ion-toolbar>
 </ion-footer>
