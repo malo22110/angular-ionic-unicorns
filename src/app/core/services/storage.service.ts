@@ -5,7 +5,6 @@ import { Storage } from '@ionic/storage-angular';
 import { CoreServiceModule } from '../core-service.module';
 import { Unicorn } from '../models/unicorn.model';
 
-const STORAGE_KEY = 'unicorns';
 
 @Injectable({
   providedIn: CoreServiceModule
@@ -24,24 +23,24 @@ export class StorageService {
   }
 
   /**
-   * store a unicorn in application storage.
+   * store a entry in application storage.
    * handle first submission with "if !result" guard.
    *
    * @param unicorn
    * @returns ionic-storage promise<any>
    */
-  public addUnicorn(unicorn: Unicorn) {
-    return this.getAllUnicorns().then(result => {
+  public setInArray(STORAGE_KEY: string, entry: any): Promise<any> {
+    return this.get(STORAGE_KEY).then(result => {
       if (!result) {
-        return this.storage.set(STORAGE_KEY, [unicorn]);
+        return this.storage.set(STORAGE_KEY, [entry]);
       }
 
-      result.unshift(unicorn);
+      result.unshift(entry);
       return this.storage.set(STORAGE_KEY, result);
     });
   }
 
-  public async getAllUnicorns(): Promise<Unicorn[]> {
+  public async get(STORAGE_KEY: string): Promise<any> {
     return this.storage.get(STORAGE_KEY);
   }
 }

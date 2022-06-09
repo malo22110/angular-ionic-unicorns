@@ -2,7 +2,6 @@ import { takeUntil } from 'rxjs/operators';
 import { Unicorn } from './../core/models/unicorn.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { StorageService } from '../core/services/storage.service';
 import { Router } from '@angular/router';
 import { EUnicornGender } from '../core/enums/unicorn-gender.enum';
 import { UnicornService } from '../core/services/unicorns.service';
@@ -26,7 +25,6 @@ export class LovePage implements OnInit, OnDestroy {
   private onDestroy$: Subject<void> = new Subject<void>();
 
   constructor(
-    private readonly storageService: StorageService,
     private readonly unicornService: UnicornService,
     private readonly router: Router
   ) { }
@@ -68,7 +66,7 @@ export class LovePage implements OnInit, OnDestroy {
   }
 
   onClickMakeABaby(): void {
-    this.storageService.addUnicorn(
+    this.unicornService.addUnicorn(
       new Unicorn({
         name: `${this.parent1.name}${this.parent2.name}`,
         age: 1,

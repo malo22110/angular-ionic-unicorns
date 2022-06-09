@@ -47,5 +47,4 @@ export class HomePage implements OnDestroy {
       this.atLeastOneMaleAndOneFemale = this.unicornService.atLeastOneMaleAndOneFemale(unicorns);
     });
   }
-
 }

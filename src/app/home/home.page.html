@@ -7,35 +7,39 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid>
-    <ion-row class="ion-justify-content-center">
-
-      <ng-container *ngIf="(unicorns$ | async) as unicorns; else emptyState">
-        <ion-card
-          *ngFor="let unicorn of unicorns"
-          class="unicorn-card"
-        >
-          <ion-card-header>
-            <div class="color-display">
-              <app-unicorn-display [unicorn]="unicorn">
-              </app-unicorn-display>
-            </div>
-            <ion-card-title>
-              {{ unicorn.name }}
-            </ion-card-title>
-            <ion-card-subtitle>{{ unicorn.gender }}</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            Age: {{ unicorn.age }}
-          </ion-card-content>
-        </ion-card>
-      </ng-container>
+  <ion-grid *ngIf="(unicorns$ | async) as unicorns; else emptyState">
+    <ion-row
+      class="ion-justify-content-center"
+      data-testid="unicorns-list"
+    >
+      <ion-card
+        *ngFor="let unicorn of unicorns; let i = index"
+        [attr.data-testid]="'unicorn-' + i"
+        class="unicorn-card"
+      >
+        <ion-card-header>
+          <div class="color-display">
+            <app-unicorn-display [unicorn]="unicorn">
+            </app-unicorn-display>
+          </div>
+          <ion-card-title [attr.data-testid]="'unicorn-name-' + i">
+            {{ unicorn.name }}
+          </ion-card-title>
+          <ion-card-subtitle [attr.data-testid]="'unicorn-gender-' + i">
+            {{ unicorn.gender }}
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content [attr.data-testid]="'unicorn-age-' + i">
+          Age: {{ unicorn.age }}
+        </ion-card-content>
+      </ion-card>
     </ion-row>
   </ion-grid>
 
 
   <ng-template #emptyState>
     <ion-text
+      data-testid="empty-state"
       color="primary"
       class="ion-text-center"
     >
@@ -53,12 +57,16 @@
     <ion-fab-button
       *ngIf="atLeastOneMaleAndOneFemale"
       class="btn-make-love"
+      data-testid="btn-make-love"
       (click)="onClickNavigateToLovePage()"
     >
       <ion-icon name="heart-half-outline"></ion-icon>
     </ion-fab-button>
 
-    <ion-fab-button (click)="onClickNavigateToCreatePage()">
+    <ion-fab-button 
+      data-testid="btn-create"
+      (click)="onClickNavigateToCreatePage()"
+    >
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

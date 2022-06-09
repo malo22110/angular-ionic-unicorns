@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { EUnicornGender } from '../core/enums/unicorn-gender.enum';
 import { Unicorn } from '../core/models/unicorn.model';
-import { StorageService } from '../core/services/storage.service';
+import { UnicornService } from '../core/services/unicorns.service';
 import { ColorUtil, HEX_COLOR_PATTERN } from '../core/utlis/colors.util';
 
 @Component({
@@ -24,7 +24,7 @@ export class CreatePage implements OnInit, OnDestroy {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly storageService: StorageService,
+    private readonly unicornService: UnicornService,
     private readonly router: Router,
     private readonly cdr: ChangeDetectorRef,
 
@@ -77,7 +77,7 @@ export class CreatePage implements OnInit, OnDestroy {
 
   onClickSubmitForm() {
     if (this.unicornForm.valid) {
-      this.storageService.addUnicorn(this.unicornForm.value).then(_res => {
+      this.unicornService.addUnicorn(this.unicornForm.value).then(_res => {
         this.router.navigate(['/', 'home']);
       }).catch((error) => {
         console.log(error);

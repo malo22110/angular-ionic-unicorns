@@ -31,12 +31,14 @@
               required
             ></ion-input>
             <span
+              data-testid="form-name-error-required"
               class="error ion-padding"
               *ngIf="unicornForm.touched && unicornForm.controls.name.errors?.required"
             >
               Name is required.
             </span>
             <span
+              data-testid="form-name-error-minlength"
               class="error ion-padding"
               *ngIf="unicornForm.controls.name.errors?.minlength"
             >
@@ -54,18 +56,21 @@
               required
             ></ion-input>
             <span
+              data-testid="form-age-error-required"
               class="error ion-padding"
               *ngIf="unicornForm.controls.age.errors?.required"
             >
               Age is required.
             </span>
             <span
+              data-testid="form-age-error-min"
               class="error ion-padding"
               *ngIf="unicornForm.controls.age.errors?.min"
             >
               Age should be min 1 year old.
             </span>
             <span
+              data-testid="form-age-error-max"
               class="error ion-padding"
               *ngIf="unicornForm.controls.age.errors?.max"
             >
@@ -123,6 +128,7 @@
 <ion-footer class="footer ion-justify-content-center">
   <ion-toolbar>
     <ion-button
+      data-testid="btn-submit"
       expand="full"
       color="secondary"
       class="btn-save"
