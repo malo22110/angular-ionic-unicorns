@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { EUnicornGender } from '../core/enums/unicorn-gender.enum';
@@ -27,7 +28,7 @@ export class CreatePage implements OnInit, OnDestroy {
     private readonly unicornService: UnicornService,
     private readonly router: Router,
     private readonly cdr: ChangeDetectorRef,
-
+    public toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -78,11 +79,28 @@ export class CreatePage implements OnInit, OnDestroy {
   onClickSubmitForm() {
     if (this.unicornForm.valid) {
       this.unicornService.addUnicorn(this.unicornForm.value).then(_res => {
+        this.presentSubmitSuccesToast();
         this.router.navigate(['/', 'home']);
-      }).catch((error) => {
-        console.log(error);
-      });
+      }).catch((_error) => this.presentSubmitErrorToast());
     }
+  }
+
+  private async presentSubmitSuccesToast() {
+    const toast = await this.toastController.create({
+      color: 'success',
+      message: 'Unicorn saved !',
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  private async presentSubmitErrorToast() {
+    const toast = await this.toastController.create({
+      color: 'error',
+      message: 'Error occured while saving unicorn, please try again.',
+      duration: 2000
+    });
+    toast.present();
   }
 
   private paintUnicorn(value) {
