@@ -16,22 +16,33 @@ Use docker for the environment (Aide)
 (Bonus) IONIC 5+
 (Bonus) RXJS / NGRX
 ## Functional Results:
-Part 1. Unicorn Management
+### Part 1. Unicorn Management
+
 A unicorn should be identifiable by his name, his color (formatted “XXXXXX” where X is RGB color in hex), his gender (male, female, other) and his age.
 
 As a visitor of the website, I should be able to show all the unicorns on the main page.
+
 As a visitor of the website, I should be able to create a unicorn using an action on the main page.
+
 As a visitor of the website, I should be able to see the unicorn information. 
+
 As a visitor of the website, I should not have to recreate the unicorn if I reload the page or quit it. 
-Part 2. Unicorn Love
+
+### Part 2. Unicorn Love
 Let’s give the unicorn some love. Love is everywhere. So why not … 
 
 As a visitor of the website, I should be able to make two unicorn mates.
+
 As a unicorn mating, i should be able to give birth to a baby unicorn with the following specs:
+
 A baby unicorn could only exist if his parents contain one male and one female.
+
 A baby unicorn herited his color from a mix between his parents.
+
 A baby unicorn name is a concatenated string of his parents name.
-Part 3. Unicorn Fun
+
+### Part 3. Unicorn Fun
+
 Give us some fun! Do something cool or whatever you like. 
 
 
