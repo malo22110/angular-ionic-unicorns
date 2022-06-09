@@ -2,7 +2,7 @@
 angular-ionic-unicorns
 
 
-Rules : 
+## Rules : 
 Unicorn 3.0 (Newbie)
 Test by CLICKLAB (v2.1)
 The purpose of this test is to see your skills in action. Be smart, use the best practices and don’t forget to match the results needed. You should respect the technical requirements, for the rest, feel free to do whatever you want. We need a proof of concept with source files and demo.
@@ -15,7 +15,7 @@ Use docker for the environment (Aide)
 (Bonus) Web-design & Ergonomics
 (Bonus) IONIC 5+
 (Bonus) RXJS / NGRX
-Functional Results:
+## Functional Results:
 Part 1. Unicorn Management
 A unicorn should be identifiable by his name, his color (formatted “XXXXXX” where X is RGB color in hex), his gender (male, female, other) and his age.
 
@@ -36,16 +36,20 @@ Give us some fun! Do something cool or whatever you like.
 
 
 
-Home page :
+## Home page :
 
 ![image](https://user-images.githubusercontent.com/17024249/172849870-b5f220ee-5feb-44ff-824f-b80f23c8aed8.png)
 
 
-Creation page :
+## Creation page :
 
 ![image](https://user-images.githubusercontent.com/17024249/172850040-808254dc-ddb1-414b-b4cf-9ca380aafa4b.png)
 
 
-Love page : 
+## Love page : 
 
 ![image](https://user-images.githubusercontent.com/17024249/172850180-b77575f7-61b4-4e2c-8a5f-a89c7872dfe0.png)
+
+
+## this is the baby : 
+![image](https://user-images.githubusercontent.com/17024249/172850445-9702f994-b53d-4007-8964-27236519afa5.png)
