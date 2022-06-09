@@ -73,7 +73,7 @@ export class LovePage implements OnInit, OnDestroy {
         name: `${this.parent1.name}${this.parent2.name}`,
         age: 1,
         gender: EUnicornGender[EnumUtil.randomEnumKey(EUnicornGender)],
-        color: ColorUtil.blend(this.parent1.color, this.parent2.color, 50)
+        color: ColorUtil.blend(this.parent1.color, this.parent2.color)
       })
     ).then(_res => {
       this.parent1 = this.parent2 = null;

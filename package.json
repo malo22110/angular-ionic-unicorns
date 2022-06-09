@@ -32,6 +32,7 @@
     "@paddls/ts-serializer": "^1.0.12-rc.0",
     "@witty-services/ngx-serializer": "^1.0.9",
     "@witty-services/ts-serializer": "^1.0.12-rc.0",
+    "color-blend": "^4.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
