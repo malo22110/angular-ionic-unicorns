@@ -1,9 +1,7 @@
-import { NgxSerializerService } from '@witty-services/ngx-serializer';
 import { Injectable } from '@angular/core';
 
 import { Storage } from '@ionic/storage-angular';
 import { CoreServiceModule } from '../core-service.module';
-import { Unicorn } from '../models/unicorn.model';
 
 
 @Injectable({
@@ -12,7 +10,6 @@ import { Unicorn } from '../models/unicorn.model';
 export class StorageService {
 
   constructor(
-    private readonly serializer: NgxSerializerService,
     private storage: Storage
   ) {
     this.init();
@@ -29,18 +26,18 @@ export class StorageService {
    * @param unicorn
    * @returns ionic-storage promise<any>
    */
-  public setInArray(STORAGE_KEY: string, entry: any): Promise<any> {
-    return this.get(STORAGE_KEY).then(result => {
+  public setInArray(storageKey: string, entry: any): Promise<any> {
+    return this.get(storageKey).then(result => {
       if (!result) {
-        return this.storage.set(STORAGE_KEY, [entry]);
+        return this.storage.set(storageKey, [entry]);
       }
 
       result.unshift(entry);
-      return this.storage.set(STORAGE_KEY, result);
+      return this.storage.set(storageKey, result);
     });
   }
 
-  public async get(STORAGE_KEY: string): Promise<any> {
-    return this.storage.get(STORAGE_KEY);
+  public async get(storageKey: string): Promise<any> {
+    return this.storage.get(storageKey);
   }
 }

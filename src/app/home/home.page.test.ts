@@ -12,6 +12,14 @@ export class HomeTestPage extends ComponentDriver<HomePage> {
     return this.queryByTestId('empty-state');
   }
 
+  get btnMakeLove(): DebugElement {
+    return this.queryByTestId('btn-make-love');
+  }
+
+  get btnCreate(): DebugElement {
+    return this.queryByTestId('btn-create');
+  }
+
   getUnicornName(index: number): DebugElement {
     return this.queryByTestId(`unicorn-name-${index}`);
   }
@@ -22,13 +30,5 @@ export class HomeTestPage extends ComponentDriver<HomePage> {
 
   getUnicornGender(index: number): DebugElement {
     return this.queryByTestId(`unicorn-gender-${index}`);
-  }
-
-  get btnMakeLove(): DebugElement {
-    return this.queryByTestId('btn-make-love');
-  }
-
-  get btnCreate(): DebugElement {
-    return this.queryByTestId('btn-create');
   }
 }

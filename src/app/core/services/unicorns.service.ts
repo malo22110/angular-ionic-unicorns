@@ -11,8 +11,8 @@ import { NgxSerializerService } from '@witty-services/ngx-serializer';
   providedIn: CoreServiceModule
 })
 export class UnicornService {
-  
-  static RESSOURCE = 'unicorns';
+
+  static ressource = 'unicorns';
 
   constructor(
     private readonly storageService: StorageService,
@@ -20,14 +20,14 @@ export class UnicornService {
   ) { }
 
   public getAllUnicorns(): Observable<Unicorn[]> {
-    return from(this.storageService.get(UnicornService.RESSOURCE)).pipe(
+    return from(this.storageService.get(UnicornService.ressource)).pipe(
       filter(elem => !!elem),
       map(elem => this.serializer.deserializeAll(Unicorn, elem))
     );
   }
 
   public addUnicorn(unicorn): Promise<Unicorn[]> {
-    return this.storageService.setInArray(UnicornService.RESSOURCE, unicorn);
+    return this.storageService.setInArray(UnicornService.ressource, unicorn);
   }
 
   public atLeastOneMaleAndOneFemale(unicorns: Unicorn[]): boolean {

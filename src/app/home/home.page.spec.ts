@@ -11,14 +11,13 @@ import { Storage } from '@ionic/storage-angular';
 import { HomeTestPage } from './home.page.test';
 import { of } from 'rxjs';
 import { Unicorn } from '../core/models/unicorn.model';
-import { testUserAgent } from '@ionic/core/dist/types/utils/platform';
 import { EUnicornGender } from '../core/enums/unicorn-gender.enum';
 
 describe('HomePage', () => {
   let component: HomePage;
   let fixture: ComponentFixture<HomePage>;
   let page: HomeTestPage;
-  
+
   const unicornMock: Unicorn = new Unicorn({
               name: 'test',
               age: 18,
