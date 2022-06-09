@@ -9,6 +9,8 @@ import { StorageService } from '../core/services/storage.service';
 import { UnicornService } from '../core/services/unicorns.service';
 import { CreatePage } from './create.page';
 import { CreateTestPage } from './create.page.test';
+import { UnicornMock } from '../core/models/unicorn.mock';
+import { Router } from '@angular/router';
 
 describe('CreatePage', () => {
   let component: CreatePage;
@@ -84,6 +86,44 @@ describe('CreatePage', () => {
       component.onClickSubmitForm();
       fixture.detectChanges();
 
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should navigate home on success', async () => {
+      fixture.detectChanges();
+      spyOnProperty(component.unicornForm, 'valid').and.returnValue(true);
+      const spy = spyOn(TestBed.inject(Router), 'navigate');
+      spyOn(TestBed.inject(UnicornService), 'addUnicorn').and.returnValue(Promise.resolve([UnicornMock.unicornMockObj]));
+      spyOn(component as any, 'presentSubmitSuccessToast');
+      component.onClickSubmitForm();
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should toast success', async () => {
+      fixture.detectChanges();
+      spyOnProperty(component.unicornForm, 'valid').and.returnValue(true);
+      spyOn(TestBed.inject(Router), 'navigate');
+      spyOn(TestBed.inject(UnicornService), 'addUnicorn').and.returnValue(Promise.resolve([UnicornMock.unicornMockObj]));
+      const spy = spyOn(component as any, 'presentSubmitSuccessToast');
+      component.onClickSubmitForm();
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should toast an error', async () => {
+      fixture.detectChanges();
+      spyOnProperty(component.unicornForm, 'valid').and.returnValue(true);
+      spyOn(TestBed.inject(UnicornService), 'addUnicorn').and.returnValue(Promise.reject());
+
+      const spy = spyOn(component as any, 'presentSubmitErrorToast');
+      component.onClickSubmitForm();
+
+      await fixture.whenStable();
       expect(spy).toHaveBeenCalled();
     });
   });

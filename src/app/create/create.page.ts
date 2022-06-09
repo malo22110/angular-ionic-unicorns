@@ -79,13 +79,13 @@ export class CreatePage implements OnInit, OnDestroy {
   onClickSubmitForm() {
     if (this.unicornForm.valid) {
       this.unicornService.addUnicorn(this.unicornForm.value).then(_res => {
-        this.presentSubmitSuccesToast();
+        this.presentSubmitSuccessToast();
         this.router.navigate(['/', 'home']);
       }).catch((_error) => this.presentSubmitErrorToast());
     }
   }
 
-  private async presentSubmitSuccesToast() {
+  private async presentSubmitSuccessToast() {
     const toast = await this.toastController.create({
       color: 'success',
       message: 'Unicorn saved !',

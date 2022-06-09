@@ -10,20 +10,12 @@ import { HomePage } from './home.page';
 import { Storage } from '@ionic/storage-angular';
 import { HomeTestPage } from './home.page.test';
 import { of } from 'rxjs';
-import { Unicorn } from '../core/models/unicorn.model';
-import { EUnicornGender } from '../core/enums/unicorn-gender.enum';
+import { UnicornMock } from '../core/models/unicorn.mock';
 
 describe('HomePage', () => {
   let component: HomePage;
   let fixture: ComponentFixture<HomePage>;
   let page: HomeTestPage;
-
-  const unicornMock: Unicorn = new Unicorn({
-              name: 'test',
-              age: 18,
-              color: '#0000000',
-              gender: EUnicornGender.male
-            });
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -71,7 +63,7 @@ describe('HomePage', () => {
     });
 
     it('should display unicorns list', () => {
-      spyOn(TestBed.inject(UnicornService), 'getAllUnicorns').and.returnValue(of([unicornMock]));
+      spyOn(TestBed.inject(UnicornService), 'getAllUnicorns').and.returnValue(of([UnicornMock.unicornMockObj]));
       component.ionViewWillEnter();
       fixture.detectChanges();
 
@@ -79,27 +71,27 @@ describe('HomePage', () => {
     });
 
     it('should display unicorn name', () => {
-      spyOn(TestBed.inject(UnicornService), 'getAllUnicorns').and.returnValue(of([unicornMock]));
+      spyOn(TestBed.inject(UnicornService), 'getAllUnicorns').and.returnValue(of([UnicornMock.unicornMockObj]));
       component.ionViewWillEnter();
       fixture.detectChanges();
 
-      expect(page.getUnicornName(0).nativeElement.textContent.trim()).toEqual(unicornMock.name);
+      expect(page.getUnicornName(0).nativeElement.textContent.trim()).toEqual(UnicornMock.unicornMockObj.name);
     });
 
     it('should display unicorn gender', () => {
-      spyOn(TestBed.inject(UnicornService), 'getAllUnicorns').and.returnValue(of([unicornMock]));
+      spyOn(TestBed.inject(UnicornService), 'getAllUnicorns').and.returnValue(of([UnicornMock.unicornMockObj]));
       component.ionViewWillEnter();
       fixture.detectChanges();
 
-      expect(page.getUnicornGender(0).nativeElement.textContent.trim()).toEqual(unicornMock.gender);
+      expect(page.getUnicornGender(0).nativeElement.textContent.trim()).toEqual(UnicornMock.unicornMockObj.gender);
     });
 
     it('should display unicorn age', () => {
-      spyOn(TestBed.inject(UnicornService), 'getAllUnicorns').and.returnValue(of([unicornMock]));
+      spyOn(TestBed.inject(UnicornService), 'getAllUnicorns').and.returnValue(of([UnicornMock.unicornMockObj]));
       component.ionViewWillEnter();
       fixture.detectChanges();
 
-      expect(page.getUnicornAge(0).nativeElement.textContent.trim()).toEqual(`Age: ${unicornMock.age}`);
+      expect(page.getUnicornAge(0).nativeElement.textContent.trim()).toEqual(`Age: ${UnicornMock.unicornMockObj.age}`);
     });
 
     it('should not display love button', () => {
@@ -131,7 +123,7 @@ describe('HomePage', () => {
 
     describe('#watchUnicorns', () => {
     it('should set atLeastOneMaleAndOneFemale false', () => {
-      spyOn(TestBed.inject(UnicornService), 'getAllUnicorns').and.returnValue(of([unicornMock]));
+      spyOn(TestBed.inject(UnicornService), 'getAllUnicorns').and.returnValue(of([UnicornMock.unicornMockObj]));
       spyOn(TestBed.inject(UnicornService), 'atLeastOneMaleAndOneFemale').and.returnValue(false);
       component.ionViewWillEnter();
       fixture.detectChanges();
@@ -140,7 +132,7 @@ describe('HomePage', () => {
     });
 
     it('should set atLeastOneMaleAndOneFemale true', () => {
-      spyOn(TestBed.inject(UnicornService), 'getAllUnicorns').and.returnValue(of([unicornMock]));
+      spyOn(TestBed.inject(UnicornService), 'getAllUnicorns').and.returnValue(of([UnicornMock.unicornMockObj]));
       spyOn(TestBed.inject(UnicornService), 'atLeastOneMaleAndOneFemale').and.returnValue(true);
       fixture.detectChanges();
       component.ionViewWillEnter();
