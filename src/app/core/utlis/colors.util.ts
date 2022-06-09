@@ -24,11 +24,11 @@ export class ColorUtil {
 
   public static convertToRGB(hex) {
     hex = hex.replace('#', '');
-    if (hex.length != 6) {
-      throw Error("Only six-digit hex colors are allowed.");
+    if (hex.length !== 6) {
+      throw Error('Only six-digit hex colors are allowed.');
     }
+    const aRgbHex = hex.match(/.{1,2}/g);
 
-    var aRgbHex = hex.match(/.{1,2}/g);
     return {
       r: parseInt(aRgbHex[0], 16),
       g: parseInt(aRgbHex[1], 16),
@@ -47,16 +47,13 @@ export class ColorUtil {
   }
 
   static fullColorHex(r, g, b) {
-    var red = ColorUtil.rgbToHex(r);
-    var green = ColorUtil.rgbToHex(g);
-    var blue = ColorUtil.rgbToHex(b);
-    return `#${red + green + blue}`;
+    return `#${ColorUtil.rgbToHex(r) + ColorUtil.rgbToHex(g) + ColorUtil.rgbToHex(b)}`;
   }
 
   static rgbToHex(rgb) {
-    var hex = Number(rgb).toString(16);
+    let hex = Number(rgb).toString(16);
     if (hex.length < 2) {
-      hex = "0" + hex;
+      hex = `0${hex}`;
     }
     return hex;
   }
