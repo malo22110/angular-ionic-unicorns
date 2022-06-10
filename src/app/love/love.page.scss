@@ -1,15 +1,30 @@
+$selectedParent2Color: transparent;
+$selectedParent1Color: transparent;
+
+.content {
+  background: linear-gradient(0.25turn, var(--selectedParent2Color), var(--selectedParent1Color));
+}
+
 .parents-col {
-  max-width: 250px;
-  margin-right: 15px;
+
+  padding-right: 15px;
+  
+  &.parent1-bg-color {
+    background-color: var(--selectedParent2Color, $selectedParent2Color);
+  }
+
+  &.parent2-bg-color {
+    background-color: var(--selectedParent1Color, $selectedParent1Color);
+  }
 
   .unicorn-card {
     width: 250px;
     &:hover {
-      border: 2px solid yellow;
+      border: 2px solid var(--ion-color-tertiary);
     }
 
     &.selected {
-      background-color: yellow;
+      background-color: var(--ion-color-primary);
     }
 
     .color-display {

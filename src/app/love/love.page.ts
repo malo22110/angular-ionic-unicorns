@@ -43,10 +43,13 @@ export class LovePage implements OnInit, OnDestroy {
   onClickToggleParent1Selection(unicorn): void {
     if (!this.isCurrentParent1(unicorn)) {
       this.parent1 = unicorn;
+      document.body.style.setProperty(`--selectedParent1Color`, unicorn.color);
     } else {
+      document.body.style.setProperty(`--selectedParent1Color`, null);
       this.parent1 = null;
     }
     this.parent2 = null;
+    document.body.style.setProperty(`--selectedParent2Color`, null);
   }
 
   isCurrentParent1(unicorn: Unicorn): boolean {
@@ -56,8 +59,10 @@ export class LovePage implements OnInit, OnDestroy {
   onClickToggleParent2Selection(unicorn: Unicorn): void {
     if (!this.isCurrentParent2(unicorn)) {
       this.parent2 = unicorn;
+      document.body.style.setProperty(`--selectedParent2Color`, unicorn.color);
     } else {
       this.parent2 = null;
+      document.body.style.setProperty(`--selectedParent2Color`, null);
     }
   }
 
