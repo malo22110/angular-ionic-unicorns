@@ -45,22 +45,3 @@ A baby unicorn name is a concatenated string of his parents name.
 
 Give us some fun! Do something cool or whatever you like. 
 
-
-
-## Home page :
-
-![image](https://user-images.githubusercontent.com/17024249/172849870-b5f220ee-5feb-44ff-824f-b80f23c8aed8.png)
-
-
-## Creation page :
-
-![image](https://user-images.githubusercontent.com/17024249/172850040-808254dc-ddb1-414b-b4cf-9ca380aafa4b.png)
-
-
-## Love page : 
-
-![image](https://user-images.githubusercontent.com/17024249/172850180-b77575f7-61b4-4e2c-8a5f-a89c7872dfe0.png)
-
-
-## this is the baby : 
-![image](https://user-images.githubusercontent.com/17024249/172850445-9702f994-b53d-4007-8964-27236519afa5.png)
