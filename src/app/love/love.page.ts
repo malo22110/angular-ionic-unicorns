@@ -37,6 +37,8 @@ export class LovePage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    document.body.style.setProperty(`--selectedParent1Color`, null);
+    document.body.style.setProperty(`--selectedParent2Color`, null);
     this.onDestroy$.complete();
   }
 
