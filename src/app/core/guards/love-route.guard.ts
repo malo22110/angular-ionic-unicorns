@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { CoreServiceModule } from '../core-service.module';
 import { UnicornService } from '../services/unicorns.service';
 import { Observable } from 'rxjs';
@@ -16,18 +16,17 @@ export class LoveRouteGuard implements CanActivateChild, CanActivate {
     private readonly router: Router
   ) { }
 
-  canActivate(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): Observable<boolean> | boolean {
+  canActivate(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): Observable<UrlTree | boolean> {
     return this.unicornService.getAllUnicorns().pipe(
       map((unicorns: Unicorn[]) => {
-        if (unicorns || this.unicornService.atLeastOneMaleAndOneFemale(unicorns)) {
+        if (unicorns && this.unicornService.atLeastOneMaleAndOneFemale(unicorns)) {
           return true;
         }
-        this.router.navigate(['/', 'home']);
-        return false;
+        return this.router.createUrlTree(['/', 'home']);
       }));
   }
 
-  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<UrlTree | boolean> {
     return this.canActivate(childRoute, state);
   }
 

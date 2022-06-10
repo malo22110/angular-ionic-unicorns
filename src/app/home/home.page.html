@@ -7,13 +7,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid *ngIf="(unicorns$ | async) as unicorns; else emptyState">
+  <ion-grid *ngIf="(unicorns$ | async)?.length; else emptyState">
     <ion-row
       class="ion-justify-content-center"
       data-testid="unicorns-list"
     >
       <ion-card
-        *ngFor="let unicorn of unicorns; let i = index"
+        *ngFor="let unicorn of unicorns$ | async; let i = index"
         [attr.data-testid]="'unicorn-' + i"
         class="unicorn-card"
       >
@@ -63,7 +63,7 @@
       <ion-icon name="heart-half-outline"></ion-icon>
     </ion-fab-button>
 
-    <ion-fab-button 
+    <ion-fab-button
       data-testid="btn-create"
       (click)="onClickNavigateToCreatePage()"
     >

@@ -4,7 +4,7 @@ import { CoreServiceModule } from '../core-service.module';
 import { Unicorn } from '../models/unicorn.model';
 import { EUnicornGender } from '../enums/unicorn-gender.enum';
 import { from, Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { NgxSerializerService } from '@witty-services/ngx-serializer';
 
 @Injectable({
@@ -21,8 +21,7 @@ export class UnicornService {
 
   public getAllUnicorns(): Observable<Unicorn[]> {
     return from(this.storageService.get(UnicornService.ressource)).pipe(
-      filter(elem => !!elem),
-      map(elem => this.serializer.deserializeAll(Unicorn, elem))
+      map(elem => this.serializer.deserializeAll(Unicorn, !!elem ? elem : []))
     );
   }
 
