@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { EUnicornGender } from '../core/enums/unicorn-gender.enum';
 import { Unicorn } from '../core/models/unicorn.model';
@@ -13,13 +13,14 @@ import { ColorUtil, HEX_COLOR_PATTERN } from '../core/utlis/colors.util';
   selector: 'app-create',
   templateUrl: './create.page.html',
   styleUrls: ['./create.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreatePage implements OnInit, OnDestroy {
 
   // Gender select input values
   public unicornGenderValues = Object.values(EUnicornGender);
   public unicornForm: FormGroup;
-  public unicornObs: Subject<Unicorn> = new Subject<Unicorn>();
+  public unicornObs: BehaviorSubject<Unicorn> = new BehaviorSubject<Unicorn>(null);
 
   private onDestroy$: Subject<void> = new Subject<void>();
 
