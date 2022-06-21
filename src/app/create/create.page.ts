@@ -2,13 +2,14 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { OnDestroyListener, takeUntilDestroy } from '@paddls/ngx-common';
+import { BehaviorSubject } from 'rxjs';
 import { EUnicornGender } from '../core/enums/unicorn-gender.enum';
 import { Unicorn } from '../core/models/unicorn.model';
 import { UnicornService } from '../core/services/unicorns.service';
 import { ColorUtil, HEX_COLOR_PATTERN } from '../core/utlis/colors.util';
 
+@OnDestroyListener()
 @Component({
   selector: 'app-create',
   templateUrl: './create.page.html',
@@ -22,14 +23,12 @@ export class CreatePage implements OnInit, OnDestroy {
   public unicornForm: FormGroup;
   public unicornObs: BehaviorSubject<Unicorn> = new BehaviorSubject<Unicorn>(null);
 
-  private onDestroy$: Subject<void> = new Subject<void>();
-
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly unicornService: UnicornService,
     private readonly router: Router,
     private readonly cdr: ChangeDetectorRef,
-    public toastController: ToastController
+    public readonly toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -68,8 +67,6 @@ export class CreatePage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.onDestroy$.complete();
-    this.unicornObs.complete();
     this.unicornForm.reset();
   }
 
@@ -109,9 +106,11 @@ export class CreatePage implements OnInit, OnDestroy {
   }
 
   private watchUnicornFromValueChanges(): void {
-    this.unicornForm.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(values => {
+    this.unicornForm.valueChanges.pipe(
+      takeUntilDestroy(this)
+    ).subscribe(values => {
       this.paintUnicorn(values);
-      this.cdr.detectChanges();
+      this.cdr.markForCheck();
     });
   }
 }

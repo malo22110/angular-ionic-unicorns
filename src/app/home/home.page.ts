@@ -1,31 +1,30 @@
-import { filter, takeUntil } from 'rxjs/operators';
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { filter } from 'rxjs/operators';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Unicorn } from '../core/models/unicorn.model';
 import { UnicornService } from '../core/services/unicorns.service';
+import { OnDestroyListener, takeUntilDestroy } from '@paddls/ngx-common';
 
+@OnDestroyListener()
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomePage implements OnDestroy {
+export class HomePage {
 
   unicorns$: Observable<Unicorn[]>;
   atLeastOneMaleAndOneFemale = false;
 
-  private onDestroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private readonly unicornService: UnicornService,
-    private readonly router: Router
-  ) { }
+    private readonly router: Router,
+    private readonly cdr: ChangeDetectorRef,
 
-  ngOnDestroy(): void {
-    this.onDestroy$.complete();
-  }
+  ) { }
 
   ionViewWillEnter() {
     this.unicorns$ = this.unicornService.getAllUnicorns();
@@ -42,10 +41,11 @@ export class HomePage implements OnDestroy {
 
   private watchUnicorns(): void {
     this.unicorns$.pipe(
-      takeUntil(this.onDestroy$),
+      takeUntilDestroy(this),
       filter(unicorns => !!unicorns)
     ).subscribe((unicorns) => {
       this.atLeastOneMaleAndOneFemale = this.unicornService.atLeastOneMaleAndOneFemale(unicorns);
+      this.cdr.markForCheck();
     });
   }
 }

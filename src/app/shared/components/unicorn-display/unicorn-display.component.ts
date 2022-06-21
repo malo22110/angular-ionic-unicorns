@@ -1,9 +1,10 @@
-import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ColorUtil, HEX_COLOR_PATTERN } from '../../../core/utlis/colors.util';
 import { Unicorn } from '../../../core/models/unicorn.model';
 import { EUnicornGender } from '../../../core/enums/unicorn-gender.enum';
 import { filter } from 'rxjs/operators';
+import { OnDestroyListener, takeUntilDestroy } from '@paddls/ngx-common';
 
 class UnicornDisplay {
   bodyColor: string;
@@ -13,24 +14,25 @@ class UnicornDisplay {
   eyeColor: string;
 }
 
+@OnDestroyListener()
 @Component({
   selector: 'app-unicorn-display',
   templateUrl: './unicorn-display.component.html',
   styleUrls: ['./unicorn-display.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UnicornDisplayComponent implements OnInit, OnDestroy {
+export class UnicornDisplayComponent implements OnInit {
 
-	private _unicorn = new BehaviorSubject<Unicorn>(null);
+  private _unicorn = new BehaviorSubject<Unicorn>(null);
 
-	@Input()
-	set unicorn(value) {
-		this._unicorn.next(value);
-	};
+  @Input()
+  set unicorn(value) {
+    this._unicorn.next(value);
+  };
 
-	get unicorn() {
-		return this._unicorn.getValue();
-	}
+  get unicorn() {
+    return this._unicorn.getValue();
+  }
 
   unicornDisplay: UnicornDisplay;
 
@@ -39,19 +41,16 @@ export class UnicornDisplayComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-      this.watchUnicorn();
+    this.watchUnicorn();
   }
 
   private watchUnicorn(): void {
     this._unicorn.pipe(
+      takeUntilDestroy(this),
       filter(unicornObs => !!unicornObs)
     ).subscribe((unicorn) => {
       this.paintUnicorn(unicorn);
     });
-  }
-
-  public ngOnDestroy(): void {
-    this._unicorn.complete();
   }
 
   private paintUnicorn(unicorn: Unicorn): void {

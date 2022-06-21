@@ -1,13 +1,13 @@
-import { takeUntil } from 'rxjs/operators';
 import { Unicorn } from './../core/models/unicorn.model';
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { EUnicornGender } from '../core/enums/unicorn-gender.enum';
 import { UnicornService } from '../core/services/unicorns.service';
 import { ColorUtil } from '../core/utlis/colors.util';
 import { EnumUtil } from '../core/utlis/enum.util';
+import { OnDestroyListener, takeUntilDestroy } from '@paddls/ngx-common';
 
+@OnDestroyListener()
 @Component({
   selector: 'app-love',
   templateUrl: './love.page.html',
@@ -21,26 +21,25 @@ export class LovePage implements OnInit, OnDestroy {
   parent1: Unicorn;
   parent2: Unicorn;
 
-  atLeastOneMaleAndOneFemale = false;
-
-  private onDestroy$: Subject<void> = new Subject<void>();
-
   constructor(
     private readonly unicornService: UnicornService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-    this.unicornService.getAllUnicorns().pipe(takeUntil(this.onDestroy$)).subscribe((unicorns: Unicorn[]) => {
+    this.unicornService.getAllUnicorns().pipe(
+      takeUntilDestroy(this)
+    ).subscribe((unicorns: Unicorn[]) => {
       this.unicornsMale = unicorns.filter((elem) => elem.age >= 18 && elem.gender === EUnicornGender.male);
       this.unicornsFemale = unicorns.filter((elem) => elem.age >= 18 && elem.gender === EUnicornGender.female);
+      this.cdr.markForCheck();
     });
   }
 
   ngOnDestroy(): void {
     document.body.style.setProperty(`--selectedParent1Color`, null);
     document.body.style.setProperty(`--selectedParent2Color`, null);
-    this.onDestroy$.complete();
   }
 
   onClickToggleParent1Selection(unicorn): void {
