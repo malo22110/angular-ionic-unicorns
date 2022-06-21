@@ -1,5 +1,5 @@
 import { filter, takeUntil } from 'rxjs/operators';
-import { Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { Unicorn } from '../core/models/unicorn.model';
@@ -9,6 +9,7 @@ import { UnicornService } from '../core/services/unicorns.service';
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePage implements OnDestroy {
 

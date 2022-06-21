@@ -1,6 +1,6 @@
 import { takeUntil } from 'rxjs/operators';
 import { Unicorn } from './../core/models/unicorn.model';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { EUnicornGender } from '../core/enums/unicorn-gender.enum';
@@ -12,6 +12,7 @@ import { EnumUtil } from '../core/utlis/enum.util';
   selector: 'app-love',
   templateUrl: './love.page.html',
   styleUrls: ['./love.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LovePage implements OnInit, OnDestroy {
 
