@@ -5,16 +5,18 @@ angular-ionic-unicorns
 ## Rules : 
 Unicorn 3.0 (Newbie)
 Test by CLICKLAB (v2.1)
+
 The purpose of this test is to see your skills in action. Be smart, use the best practices and don’t forget to match the results needed. You should respect the technical requirements, for the rest, feel free to do whatever you want. We need a proof of concept with source files and demo.
-Technical Needs:
-Angular ~11+
-HTML5/SASS/Typescript
-(Less is better. None is best! ) JQuery
-No need for an API or other resources provider.
-Use docker for the environment (Aide)
-(Bonus) Web-design & Ergonomics
-(Bonus) IONIC 5+
-(Bonus) RXJS / NGRX
+
+### Technical Needs:
+- Angular ~11+
+- HTML5/SASS/Typescript
+- (Less is better. None is best! ) JQuery
+- No need for an API or other resources provider.
+- Use docker for the environment (Aide)
+- (Bonus) Web-design & Ergonomics
+- (Bonus) IONIC 5+
+- (Bonus) RXJS / NGRX
 ## Functional Results:
 ### Part 1. Unicorn Management
 
